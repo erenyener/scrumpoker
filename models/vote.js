@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var voteSchema = mongoose.Schema({
-    value: Int32Array,
+    value: Number,
     issueId: String
 });
 

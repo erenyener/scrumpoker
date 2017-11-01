@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var sprintSchema = mongoose.Schema({
     title: String,
     beautifiedUrl: String,
-    numberOfVoters: Int32Array
+    numberOfVoters: Number
 });
 
 var Sprint = mongoose.model("Sprint", sprintSchema);
