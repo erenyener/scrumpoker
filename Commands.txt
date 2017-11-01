@@ -1,0 +1,5 @@
+Full Heroku Deploy -> https://gist.github.com/evenchange4/3773179
+
+
+deploy command -> git push heroku master
+https://scrumpokertrendyol.herokuapp.com/
