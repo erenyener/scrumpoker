@@ -27,7 +27,7 @@ License
 
 MIT
 
-Test
+Test 2
 
 **Free Software, Hell Yeah!**
 
