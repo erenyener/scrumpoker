@@ -17,6 +17,7 @@ mongoose.connect(mongoDburi);
 var index = require('./routes/index');
 var sprints = require('./routes/sprints');
 var issues = require('./routes/issues');
+var votes = require('./routes/votes');
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/sprints', sprints);
 app.use('/issues', issues);
+app.use('/votes', votes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
