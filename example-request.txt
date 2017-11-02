@@ -1,0 +1,16 @@
+
+-- Sprints 
+http://localhost:3000/sprints
+POST {"title":"sprint 11 planning","numberOfVoters":5}
+GET http://localhost:3000/sprints/59fa3dbef3d36600c86a2a4a
+
+
+-- Issues 
+http://localhost:3000/Issues
+{
+    "issues":[{"title": "issue1", "orderNumber": 1}, 
+              {"title": "issue1", "orderNumber": 2},
+              {"title": "issue1", "orderNumber": 3},
+              {"title": "issue1", "orderNumber": 4}], 
+    "sprintId":"asdasdasd123"
+}

@@ -16,6 +16,7 @@ mongoose.connect(mongoDburi);
 //Routes
 var index = require('./routes/index');
 var sprints = require('./routes/sprints');
+var issues = require('./routes/issues');
 
 var app = express();
 
@@ -24,16 +25,19 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(ejsLayout.express);
 
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/sprints', sprints);
+app.use('/issues', issues);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
