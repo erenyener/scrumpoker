@@ -3,16 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
-  },  
+    "start": "node ./bin/www"
+  },
   "dependencies": {
     "async": "^2.5.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
-    "ejs": "^2.5.7",
-    "mongoose": "^4.12.6",
     "morgan": "~1.9.0"
   }
 }
