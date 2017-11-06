@@ -3,7 +3,10 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
+var mongoDburi = 'mongodb://scrumpokerapp:PhP5Cpp23@ds243805.mlab.com:43805/scrumpokerdb';
+mongoose.connect(mongoDburi);
 
 var testRoute = require('./routes/test-route');
 
