@@ -18,7 +18,7 @@ router.get('/:sprintId/', function(req, res, next) {
 
         Sprint.findById(sprintId, function (err, sprint) {
             if (err) {
-                res.layout('Layout', {title:"Scrum Master Panel"}, {content: {block:"scrum-master-panel", data:{isSucess:false, sprint: sprint, sprintId:req.params.sprintId}}}); 
+                res.layout('layout', {title:"Scrum Master Panel"}, {content: {block:"scrum-master-panel", data:{isSucess:false, sprint: sprint, sprintId:req.params.sprintId}}}); 
                 res.status(404).send();
             } else {
 
@@ -30,7 +30,7 @@ router.get('/:sprintId/', function(req, res, next) {
 
                         SessionOrder.findOne({ 'sprintId': self.sprintId }, function (err, sessionOrder) {                        
 
-                            res.layout('Layout', {title:"Scrum Master Panel", centeredTitle:false}, {content: {
+                            res.layout('layout', {title:"Scrum Master Panel", centeredTitle:false}, {content: {
                                 block:"scrum-master-panel", data:{
                                         sprint: sprint,
                                         issues:issues,
@@ -94,7 +94,7 @@ router.get('/detail/:sprintId/', function(req, res, next) {
         Sprint.findById(sprintId, function (err, sprint) {
             if (err) {
                 
-                res.layout('Layout', {title:"Scrum Master Panel"}, {content: {block:"scrum-master-panel", data:{isSucess:false, sprint: sprint, sprintId:req.params.sprintId}}}); 
+                res.layout('layout', {title:"Scrum Master Panel"}, {content: {block:"scrum-master-panel", data:{isSucess:false, sprint: sprint, sprintId:req.params.sprintId}}}); 
                 res.status(404).send();
             } else {
                 response.sprint = sprint;

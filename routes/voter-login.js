@@ -15,7 +15,7 @@ router.get('/:sprintId/', function(req, res, next) {
 
         Sprint.findById(sprintId, function (err, sprint) {
             if (err) {
-                res.layout('Layout', {title:"Sprint Not Exists", centeredTitle:true}, {content:{block:"voter-login", data:{ sprintId:0, sprintExists: false, isVoterCountReached:true }}}); 
+                res.layout('layout', {title:"Sprint Not Exists", centeredTitle:true}, {content:{block:"voter-login", data:{ sprintId:0, sprintExists: false, isVoterCountReached:true }}}); 
             } else {
                 
                 if(!!sprint){
@@ -25,11 +25,11 @@ router.get('/:sprintId/', function(req, res, next) {
 
                         var isVoterCountReached = (count<maxNumberOfVotersCount) ? false : true;
                         var pageTitle = isVoterCountReached ? "Voter Count Reached":"Your Name" ;
-                        res.layout('Layout', {title:pageTitle , centeredTitle:true}, {content:{block:"voter-login", data:{ sprintId:self.sprintId , sprintExists: true, isVoterCountReached: isVoterCountReached }}}); 
+                        res.layout('layout', {title:pageTitle , centeredTitle:true}, {content:{block:"voter-login", data:{ sprintId:self.sprintId , sprintExists: true, isVoterCountReached: isVoterCountReached }}}); 
 
                     });
                 }else{
-                    res.layout('Layout', {title:"Sprint Not Exists", centeredTitle:true}, {content:{block:"voter-login", data:{ sprintId:0, sprintExists: true, isVoterCountReached:true }}}); 
+                    res.layout('layout', {title:"Sprint Not Exists", centeredTitle:true}, {content:{block:"voter-login", data:{ sprintId:0, sprintExists: true, isVoterCountReached:true }}}); 
                 }
                 
 

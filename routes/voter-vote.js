@@ -16,7 +16,7 @@ router.get('/:sprintId/:userId/', function(req, res, next) {
 
         Sprint.findById(sprintId, function (err, sprint) {
             if (err) {
-                res.layout('Layout', {title:"Sprint Not Exists", centeredTitle:true}, {content:{block:"voter-vote", data:{ sprintId:0,voterId:0, sprintExists: false}}}); 
+                res.layout('layout', {title:"Sprint Not Exists", centeredTitle:true}, {content:{block:"voter-vote", data:{ sprintId:0,voterId:0, sprintExists: false}}}); 
             } else {
                 
                 if(!!sprint){
@@ -24,11 +24,11 @@ router.get('/:sprintId/:userId/', function(req, res, next) {
                     
                     Voter.count({sprintId: self.sprintId}, function(err, count) {                
                         
-                        res.layout('Layout', {title:"" , centeredTitle:true}, {content:{block:"voter-vote", data:{ sprintId:self.sprintId, voterId:self.userId, sprintExists: true}}}); 
+                        res.layout('layout', {title:"" , centeredTitle:true}, {content:{block:"voter-vote", data:{ sprintId:self.sprintId, voterId:self.userId, sprintExists: true}}}); 
 
                     });
                 }else{
-                    res.layout('Layout', {title:"Sprint Not Exists", centeredTitle:true}, {content:{block:"voter-vote", data:{ sprintId:0, voterId:0, sprintExists: true}}}); 
+                    res.layout('layout', {title:"Sprint Not Exists", centeredTitle:true}, {content:{block:"voter-vote", data:{ sprintId:0, voterId:0, sprintExists: true}}}); 
                 }
             }
         });
