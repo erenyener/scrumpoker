@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var ejsLayout = require('ejs-layouts');
 var mongoose = require('mongoose');
 
 var mongoDburi = 'mongodb://scrumpokerapp:PhP5Cpp23@ds243805.mlab.com:43805/scrumpokerdb';
@@ -12,7 +13,11 @@ var testRoute = require('./routes/test-route');
 
 var app = express();
 
+// view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use(ejsLayout.express);
+
 
 
 app.use(logger('dev'));
