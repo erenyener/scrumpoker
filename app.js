@@ -15,6 +15,7 @@ mongoose.connect(mongoDburi);
 
 //Routes
 var index = require('./routes/index');
+var testRoute = require('./routes/test-route');
 var scrumMasterPanel = require('./routes/scrum-master-panel.js');
 var voterLogin = require('./routes/voter-login.js');
 var voterVote = require('./routes/voter-vote.js');
@@ -41,7 +42,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+// app.use('/', index);
+app.use('/', testRoute);
+
 app.use('/smp', scrumMasterPanel);
 app.use('/vl', voterLogin);
 app.use('/vv', voterVote);
