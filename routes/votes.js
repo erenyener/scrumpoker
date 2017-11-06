@@ -23,7 +23,7 @@ router.get('/:issueId', function(req, res, next) {
         if (err) {
             res.status(404).send();
         } else {
-            res.status(200).send(JSON.stringify(votes));
+            res.status(200).send(votes);
         }
     });
 });
@@ -31,9 +31,11 @@ router.get('/:issueId', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 
-     var newVote = new Issue({
+     var newVote = new Vote({
             value: req.body.value,
-            sprintId: req.body.sprintId
+            sprintId: req.body.sprintId,
+            issueId:req.body.issueId,
+            voterId: req.body.voterId
         });
 
     newVote.save(function (err, data) {       
@@ -44,7 +46,6 @@ router.post('/', function(req, res, next) {
         }
     }); 
         
-    res.send(JSON.stringify({ isError:false, response:req.body.issues }));
 });
 
 

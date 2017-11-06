@@ -3,7 +3,8 @@ var PokerPlanApp = (function () {
 
     var END_POINTS = {
         CREATE_SPRINT_END_POINT : "/sprints",
-        SUBMIT_ISSUES_END_POINT: "/issues"
+        SUBMIT_ISSUES_END_POINT: "/issues",
+        SCRUM_MASTER_PANEL_END_POINT: "smp/"
     }
 
     var createSprint = function(sprintName, numberOfVoters, cb){
@@ -19,8 +20,6 @@ var PokerPlanApp = (function () {
             url: END_POINTS.CREATE_SPRINT_END_POINT,
             data: requestData, 
             success: function (data) {      
-                console.log(data);
-                console.log(data.response);
                 if(!!data && !!data.response){
                     cb(data.response._id);
                 }               
@@ -50,8 +49,7 @@ var PokerPlanApp = (function () {
             type: "POST",
             url: END_POINTS.SUBMIT_ISSUES_END_POINT,
             data: requestData, 
-            success: function (data) {      
-                console.log(data);
+            success: function (data) {     
                 cb();           
             }
         });     
@@ -62,7 +60,9 @@ var PokerPlanApp = (function () {
             if(sprintId !=='' ){
                 var issuesArray = issues.split("\n");
                 createIssues(sprintId, issuesArray, function(){
-
+                    if(sprintId && sprintId != '' && sprintId.length > 0){
+                        document.location = END_POINTS.SCRUM_MASTER_PANEL_END_POINT + sprintId;
+                    }
                 });
             }
         });       

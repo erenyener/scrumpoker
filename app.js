@@ -15,9 +15,15 @@ mongoose.connect(mongoDburi);
 
 //Routes
 var index = require('./routes/index');
+var scrumMasterPanel = require('./routes/scrum-master-panel.js');
+var voterLogin = require('./routes/voter-login.js');
+var voterVote = require('./routes/voter-vote.js');
+
+//api routes
 var sprints = require('./routes/sprints');
 var issues = require('./routes/issues');
 var votes = require('./routes/votes');
+var voters = require('./routes/voters');
 
 var app = express();
 
@@ -36,9 +42,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/smp', scrumMasterPanel);
+app.use('/vl', voterLogin);
+app.use('/vv', voterVote);
+
 app.use('/sprints', sprints);
 app.use('/issues', issues);
 app.use('/votes', votes);
+app.use('/voters', voters);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

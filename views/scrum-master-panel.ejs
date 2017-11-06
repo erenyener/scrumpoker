@@ -1,0 +1,83 @@
+
+
+<input type="hidden" id="sprintId" value="<%- sprint.id %>">
+<input type="hidden" id="issuesLength" value="<%- issues.length %>">
+<input type="hidden" id="activeOrderNumber" value="<%- activeQuestionOrder.activeOrderNumber %>">
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h3 class="capitilize"></h3>
+    
+    <div class="row mt-4">
+
+        <div class="col-lg-12">
+            <div class="jumbotron">         
+			    <p class="lead">Voter Panel : http://localhost:3000/vl/<%- sprint.id %> </p>              
+            </div>
+        </div>
+        
+
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">        
+            
+                                
+            <div class="card mb-4">
+
+				<div class="card-block">
+					<h3 class="card-title capitilize"><%- sprint.title %></h3>
+					
+					<h6 class="card-subtitle mb-2 text-muted">Issue List</h6>
+					
+					<ul class="timeline">
+                        <% for(var i=0; i<issues.length; i++) {%>
+                            <li>
+                                <div data-issueId="<%= issues[i]._id %>" class="timeline-badge <%= ( i+1 ) === activeQuestionOrder.activeOrderNumber ? 'primary' : '' %>">
+
+                                    <%if (issues[i].finalScore > 0) { %>
+                                        <div class=""><%= issues[i].finalScore %></div>
+                                    <% } %>
+
+                                    <%if (issues[i].finalScore === 0) { %>
+                                        <em class="fa fa-question"></em>
+                                    <% } %>
+                                    
+                                </div>
+
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h5 class="timeline-title mt-2">Issue <%= i+1 %></h5>
+                                    </div>
+                                    
+                                    <div class="timeline-body">
+                                        <p><%= issues[i].title %></p>
+                                    </div>
+                                </div>
+                            
+                                <!-- < -->
+                            </li>
+                        <% } %>
+                        
+					</ul>
+				</div>
+			</div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">        
+
+            <div class="card mb-4">
+		        <div class="card-block">
+		        	<h3 class="card-title">Votes</h3>                                
+		        	<h6 class="card-subtitle mb-2 text-muted" id="activeSprintTitle"></h6>
+                
+                    <div id="users"></div>
+                                                
+		        </div>
+			</div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="/javascripts/apps/scrum-master-panel-app/app.js"></script>

@@ -14,3 +14,9 @@ http://localhost:3000/Issues
               {"title": "issue1", "orderNumber": 4}], 
     "sprintId":"asdasdasd123"
 }
+
+
+pages : 
+http://localhost:3000/smp/ voter-vote sprintid/userid
+http://localhost:3000/vl/59fc85d868e31d034061d614/ voter-login sprintid
+http://localhost:3000/vv/59fc85d868e31d034061d614/59fcec2d36c74620a448f889 voter-vote sprintid/userid

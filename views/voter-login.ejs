@@ -1,0 +1,30 @@
+
+
+<%if (sprintExists && !isVoterCountReached) { %>
+	<input type="hidden" id="sprintId" value="<%- sprintId %>"/>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+		<form class="form-horizontal" action="" method="post">
+					<fieldset>					
+
+						<div class="form-group">
+							
+							<div class="col-12 no-padding">
+								<input id="name" name="name" type="text"  class="form-control">
+							</div>
+						</div>
+						
+						<!-- Form actions -->
+						<div class="form-group">
+							<div class="col-12 no-padding">
+								<a href="javascript:void(0);" id="loginButton" class="btn btn-primary btn-block">Start Voting</a>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+	</div>
+<% } %>
+
+
+
+<script src="/javascripts/apps/voter-login-app/app.js"></script>
