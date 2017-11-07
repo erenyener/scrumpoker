@@ -25,7 +25,6 @@ var VoterVoteApp = (function () {
                 url: END_POINTS.GET_ACTIVE_ISSUE_END_POINT + sprintId,
                 success: function (data) {      
                     if(data){
-                        console.log(data);
                         $('#subtitle').text(data.title);             
                         
                         if($('#activeIssueId').val() !== data._id){
@@ -68,7 +67,7 @@ var VoterVoteApp = (function () {
                 url: END_POINTS.VOTE_END_POINT,
                 data:requestData,
                 success: function (data) {      
-                    console.log(data);
+                    
                 }
         });
     };

@@ -53,4 +53,44 @@ a {
 .progress-label.vote {
     font-size: 25px;
     font-weight: bold;
+    display: none;
+}
+
+span.nod-error-message {
+    color: #d9534f!important;
+    font-weight: bold;
+    margin-top: 3px;
+    padding-left: 3px;
+    font-size: 13px;
+}
+
+.nod-error textarea {
+    margin-bottom: 10px !important;
+}
+
+.nod-error input {
+    margin-bottom: 5px !important;
+}
+
+.show{
+    display: block !important;
+}
+
+.vote-status{
+    width: 72px !important;
+    height: 69px !important;
+    background-image: url(../images/not-voted.png);
+    background-size: 72px 69px;
+}
+
+.voted > div > .vote-status{
+    background-image: url(../images/voted.png) !important;
+}
+
+.coffee > div > .vote-status{
+    background-image: url(../images/coffee.png) !important;
+}
+
+.unknown > div > .vote-status{
+    background-image: url(../images/question.png) !important;
 }

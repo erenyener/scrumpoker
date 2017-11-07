@@ -42,6 +42,11 @@ $(document).ready(function () {
         var voterName = $('#name').val();
         var sprintId = $('#sprintId').val();
 
-        VoterLoginApp.login(voterName, sprintId);
+        if (window.validatorNod.getStatus('#name') !== nod.constants.INVALID && window.validatorNod.getStatus('#name') !== nod.constants.UNCHECKED) {
+            VoterLoginApp.login(voterName, sprintId);
+        }else{
+            toastr.error('Name is Invalid');
+        }
+        
     })
 })

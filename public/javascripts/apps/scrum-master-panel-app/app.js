@@ -8,9 +8,14 @@ var ScrumMasterPanelApp = (function () {
         GET_SPRINT_DETAIL_END_POINT: "/smp/detail/"
     }
 
+    var CONSTANTS = {
+        UNKNOWN: -1,
+        COFFEE: -2,
+    }
+
     var TEMPLATES = {
         USER: '<div id="{{userId}}" class="user-progress justify-center">'
-                    +'<div class="col-sm-3 col-md-2 col-xl-1" style="padding: 0;"><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/88090-200.png" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;"></div>'
+                    +'<div class="col-sm-3 col-md-2 col-xl-1" style="padding: 0;"><div alt="profile photo" class="vote-status"></div></div>'
 		        	+'<div class="col-sm-6 col-md-8 col-xl-10"><h6 class="pt-1">{{userName}}</h6></div>'
 		            +'<div class="col-sm-3 col-md-2 col-xl-1"><div class="progress-label vote"></div></div>'
                 +'</div>'
@@ -32,7 +37,7 @@ var ScrumMasterPanelApp = (function () {
         }
     };
 
-    var applyActiveQuestion = function(issues, activeSprintOrderNumber){
+    var applyActiveQuestion = function(issues, activeSprintOrderNumber, numberOfVoters){
        var activeIssue =  _.find(issues, function (issue) { return issue.orderNumber === activeSprintOrderNumber  });
        var activeIssueId = activeIssue._id
        
@@ -40,14 +45,27 @@ var ScrumMasterPanelApp = (function () {
                 type: "GET",
                 url: END_POINTS.GET_VOTES_END_POINT   + activeIssueId,
                 success: function (response) {  
+
+                    if(response.length === numberOfVoters){
+                        $(".vote").addClass("show");
+                    }
                     
                     response.forEach(function(vote){
                         var userVoteSelector = '#' +  vote.voterId + ' .vote';
+                        
+                        var voteValue = parseInt(vote.value);
+
+                        if(voteValue === CONSTANTS.COFFEE){
+                            $('#' +  vote.voterId).addClass("coffee");
+                        }else if(voteValue === CONSTANTS.UNKNOWN){
+                            $('#' +  vote.voterId).addClass("unknown");
+                        }else{
+                            $('#' +  vote.voterId).addClass("voted");
+                        }
+
                         $(userVoteSelector).text(vote.value);
-                    })
-                    
-                    console.log(response);
-                    
+                        
+                    });
                 }
         });
     }
@@ -65,11 +83,13 @@ var ScrumMasterPanelApp = (function () {
                     if(currentActive !== activeSprintOrderNumber){
                         $('#activeOrderNumber').val(activeSprintOrderNumber);
                     }
+
+                    var numberOfVoters = sprintDetail.response.voters.length;
                    
                     
                     var issues = sprintDetail.response.issues;
                     appendVoters(sprintDetail.response.voters);  
-                    applyActiveQuestion(issues, activeSprintOrderNumber);
+                    applyActiveQuestion(issues, activeSprintOrderNumber, numberOfVoters);
                     
                 }
             });
@@ -97,9 +117,7 @@ var ScrumMasterPanelApp = (function () {
                 url: END_POINTS.FINALIZE_SCORE_END_POINT,
                 data:requestData,
                 success: function (response) {  
-                    location.reload();
-                    console.log(response);
-                    
+                    location.reload();                    
                 }
         });
     }

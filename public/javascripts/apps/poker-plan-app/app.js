@@ -12,7 +12,8 @@ var PokerPlanApp = (function () {
         var sprintId = 0 ;
 
         var requestData = {
-            "title":sprintName,"numberOfVoters":numberOfVoters
+            "title":sprintName,
+            "numberOfVoters":numberOfVoters
         };
 
         $.ajax({
@@ -55,17 +56,20 @@ var PokerPlanApp = (function () {
         });     
     }
 
+
     var submitForm = function(sprintName, numberOfVoters, issues){
+
+
         createSprint(sprintName, numberOfVoters, function(sprintId){
-            if(sprintId !=='' ){
-                var issuesArray = issues.split("\n");
-                createIssues(sprintId, issuesArray, function(){
-                    if(sprintId && sprintId != '' && sprintId.length > 0){
-                        document.location = END_POINTS.SCRUM_MASTER_PANEL_END_POINT + sprintId;
-                    }
-                });
-            }
-        });       
+                if(sprintId !=='' ){
+                    var issuesArray = issues.split("\n");
+                    createIssues(sprintId, issuesArray, function(){
+                        if(sprintId && sprintId != '' && sprintId.length > 0){
+                            document.location = END_POINTS.SCRUM_MASTER_PANEL_END_POINT + sprintId;
+                        }
+                    });
+                }
+        });               
 
     };
 
@@ -78,11 +82,35 @@ var PokerPlanApp = (function () {
 
 
 $(document).ready(function () {
+   
     
     $('#submitPokerPlan').click(function(){
-        var sprintName = $('#name').val();
-        var numberOfVoters = parseInt($('#numberOfVoters').val());
-        var issues = $('#issues').val();
-        PokerPlanApp.submitForm(sprintName, numberOfVoters, issues);
+
+        var $name = $('#name');
+        var $numberOfVoters = $('#numberOfVoters');
+        var $issues = $('#issues');
+
+        var isFormValid = true;
+
+        if (window.validatorNod.getStatus('#name') === nod.constants.INVALID || window.validatorNod.getStatus('#name') === nod.constants.UNCHECKED) {
+            toastr.error('Sprint Name is Invalid');
+            isFormValid = false;
+        }else if(window.validatorNod.getStatus('#numberOfVoters') === nod.constants.INVALID || window.validatorNod.getStatus('#numberOfVoters') === nod.constants.UNCHECKED){
+            toastr.error('Number Of Voters area is Invalid');
+            isFormValid = false;
+        }else if(window.validatorNod.getStatus('#issues') === nod.constants.INVALID || window.validatorNod.getStatus('#issues') === nod.constants.UNCHECKED){
+            toastr.error('Issues area is Invalid');
+            isFormValid = false;
+        }else{
+            isFormValid = true;
+        }        
+
+        if(isFormValid){
+            var sprintName = $name.val();
+            var numberOfVoters = parseInt($numberOfVoters.val());
+            var issues = $issues.val();
+
+            PokerPlanApp.submitForm(sprintName, numberOfVoters, issues);
+        }
     })
 })
