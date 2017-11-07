@@ -16,8 +16,8 @@ var ScrumMasterPanelApp = (function () {
     var TEMPLATES = {
         USER: '<div id="{{userId}}" class="user-progress justify-center">'
                     +'<div class="col-sm-3 col-md-2 col-xl-1" style="padding: 0;"><div alt="profile photo" class="vote-status"></div></div>'
-		        	+'<div class="col-sm-6 col-md-8 col-xl-10"><h6 class="pt-1">{{userName}}</h6></div>'
-		            +'<div class="col-sm-3 col-md-2 col-xl-1"><div class="progress-label vote"></div></div>'
+		        	+'<div class="col-sm-5 col-md-8 col-xl-6"><h6 class="pt-1">{{userName}}</h6></div>'
+		            +'<div class="col-sm-4 col-md-2 col-xl-5 tar"><div class="progress-label vote"></div></div>'
                 +'</div>'
     }
     
@@ -37,6 +37,13 @@ var ScrumMasterPanelApp = (function () {
         }
     };
 
+    var showVotes = function(votes, numberOfVoters){
+        
+        var values = votes.map(function(obj) { return obj.voterId; });
+        values = values.filter(function(v,i) { return values.indexOf(v) == i; });
+        return values.length === numberOfVoters;
+    }
+
     var applyActiveQuestion = function(issues, activeSprintOrderNumber, numberOfVoters){
        var activeIssue =  _.find(issues, function (issue) { return issue.orderNumber === activeSprintOrderNumber  });
        var activeIssueId = activeIssue._id
@@ -46,7 +53,7 @@ var ScrumMasterPanelApp = (function () {
                 url: END_POINTS.GET_VOTES_END_POINT   + activeIssueId,
                 success: function (response) {  
 
-                    if(response.length === numberOfVoters){
+                    if(showVotes(response, numberOfVoters)){
                         $(".vote").addClass("show");
                     }
                     
@@ -56,15 +63,19 @@ var ScrumMasterPanelApp = (function () {
                         var voteValue = parseInt(vote.value);
 
                         if(voteValue === CONSTANTS.COFFEE){
+                            $('#' +  vote.voterId).removeClass("unknown");
                             $('#' +  vote.voterId).addClass("coffee");
+                            $(userVoteSelector).text("COFFEE BREAK");
                         }else if(voteValue === CONSTANTS.UNKNOWN){
+                            $('#' +  vote.voterId).removeClass("coffee");
                             $('#' +  vote.voterId).addClass("unknown");
+                            $(userVoteSelector).text("NO IDEA");
                         }else{
+                            $('#' +  vote.voterId).removeClass("coffee");
+                            $('#' +  vote.voterId).removeClass("unknown");
                             $('#' +  vote.voterId).addClass("voted");
-                        }
-
-                        $(userVoteSelector).text(vote.value);
-                        
+                            $(userVoteSelector).text(vote.value);
+                        }                        
                     });
                 }
         });

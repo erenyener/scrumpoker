@@ -94,3 +94,11 @@ span.nod-error-message {
 .unknown > div > .vote-status{
     background-image: url(../images/question.png) !important;
 }
+
+.tar{
+    text-align: right !important;
+}
+
+.tar > .progress-label.vote{
+    text-align: right !important;
+}
